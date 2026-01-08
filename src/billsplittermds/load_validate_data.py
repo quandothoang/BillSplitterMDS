@@ -17,7 +17,7 @@ def load_validate_data(csv_path):
 
     Returns
     -------
-    validated_df : pandas.DataFrame
+    valid_df : pandas.DataFrame
         Dataframe that is read and validated from the given path.
 
     Examples

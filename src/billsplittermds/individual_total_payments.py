@@ -28,6 +28,7 @@ def individual_total_payments(valid_df):
     2   Ana     20.0        0.12     0.15
 
     >>> individual_total_payments(valid_df)
+        payer   actual_payment
     0   Leo     39.45
     1   Ana     25.40
 

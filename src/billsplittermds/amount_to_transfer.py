@@ -31,13 +31,13 @@ def amount_to_transfer(should_pay_df, actually_paid_df):
     Examples
     --------
     >>> should_pay_df
-        name   individual_price
+        name   should_pay
     0   Leo     45.50
     1   Ana     19.35
     2   Mia     30.00
 
     >>> actually_paid_df
-        payer   actual_payment
+        name   actually_paid
     0   Leo     39.45
     1   Ana     25.40
     2   Mia     10.00

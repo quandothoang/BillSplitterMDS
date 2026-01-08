@@ -5,10 +5,6 @@ import pandas as pd
 
 def load_validate_data(csv_path):
     """
-    Reads the raw csv file and validates numeric columns. Specifically, 
-    item price should be positive, tip percentage should be non-negative,
-    and tax percentage should be positive. Prints an error if the
-    validation process fails.
 
     Parameters
     ----------

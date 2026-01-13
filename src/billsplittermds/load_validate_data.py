@@ -25,4 +25,4 @@ def load_validate_data(csv_path):
     2   Ben      double-room     20.0        Amy;Ben       0.12     0.15
     
     """
-    pass
+    raise NotImplementedError("load_validate_data not implemented yet")

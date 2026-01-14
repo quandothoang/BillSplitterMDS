@@ -53,7 +53,7 @@ def split_by_item(valid_df):
     # initiate the dataframe `should_pay_df`
     should_pay_df = pd.DataFrame({
         'name': all_consumers,
-        'should_pay': [0] * len(all_consumers)
+        'should_pay': [0.0] * len(all_consumers)
     })
 
     # calculate the correct amount in the `should_pay` column

@@ -123,7 +123,6 @@ class TestSplitByItem:
         result = split_by_item(comprehensive_df)
         
         # Calculate expected total
-        total_cost = (50.0 * (1 + 0.10 + 0.15) + 30.0 * (1 + 0.05 * 0.10))
+        total_cost = (50.0 * (1 + 0.10 + 0.15) + 30.0 * (1 + 0.05 + 0.10))
         total_should_pay = result['should_pay'].sum()
-        
         assert abs(total_should_pay - total_cost) < 0.001

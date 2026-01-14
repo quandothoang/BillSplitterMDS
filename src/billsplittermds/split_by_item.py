@@ -33,8 +33,33 @@ def split_by_item(valid_df):
 
     >>> split_by_item(valid_df)
         name         should_pay
-    0   Leo          26.255
-    1   Ana          39.135
+    0   Ana          38.775
+    1   Leo          26.075
     
     """
-    pass
+    # create `num_shared_people` and `individual_price` column inside `valid_df`
+    valid_df['num_shared_people'] = 1 + valid_df['shared_by'].str.count(";")
+    valid_df['individual_price'] = (valid_df['item_price'] 
+                                    * (1 + valid_df['tax_pct'] + valid_df['tip_pct']) 
+                                    / valid_df['num_shared_people'])
+
+    # get a list of the unique names of consumers 
+    # who appear in the `shared_by` column at least once
+    all_consumers = set()
+    for people in valid_df['shared_by']:
+        all_consumers.update(people.split(';'))
+    all_consumers = list(all_consumers)
+
+    # initiate the dataframe `should_pay_df`
+    should_pay_df = pd.DataFrame({
+        'name': all_consumers,
+        'should_pay': [0.0] * len(all_consumers)
+    })
+
+    # calculate the correct amount in the `should_pay` column
+    for i, person in enumerate(all_consumers):
+        amt_should_pay = valid_df[valid_df['shared_by'].str.contains(person)]['individual_price'].sum()
+        should_pay_df.loc[i, 'should_pay'] = amt_should_pay
+
+    return should_pay_df
+    

@@ -69,6 +69,14 @@ transfers = amount_to_transfer(should_pay, actually_paid)
 print(transfers)
 ```
 
+## Running the function tests
+
+1. To verify that each of the functions work appropriately, function tests are written in python scripts. To run these tests go to the root project directory in the terminal and write the following command:
+
+```
+pytest tests/
+```
+
 ## Python Ecosystem
 
 There are several expense-splitting apps and packages available:

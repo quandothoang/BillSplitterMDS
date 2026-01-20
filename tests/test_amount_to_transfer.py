@@ -9,6 +9,19 @@ from billsplittermds.amount_to_transfer import amount_to_transfer
 class TestAmountToTransfer:
     """Test suite for amount_to_transfer function."""
 
+    @pytest.fixture
+    def simple_transfer_dfs(self):
+        """Create dataframes where one person owes another."""
+        should_pay = pd.DataFrame({
+            'name': ['Leo', 'Ana'],
+            'should_pay': [50.0, 50.0]
+        })
+        actually_paid = pd.DataFrame({
+            'name': ['Leo', 'Ana'],
+            'actually_paid': [100.0, 0.0]
+        })
+        return should_pay, actually_paid
+    
     def test_no_transfers_when_balanced(self):
         """Test that no transfers are needed when everyone paid their share."""
         should_pay = pd.DataFrame({
@@ -25,17 +38,10 @@ class TestAmountToTransfer:
         assert isinstance(result, pd.DataFrame)
         assert len(result) == 0
 
-    def test_simple_transfer(self):
+    def test_simple_transfer(self, simple_transfer_dfs):
         """Test simple case where one person owes another."""
-        should_pay = pd.DataFrame({
-            'name': ['Leo', 'Ana'],
-            'should_pay': [50.0, 50.0]
-        })
-        actually_paid = pd.DataFrame({
-            'name': ['Leo', 'Ana'],
-            'actually_paid': [100.0, 0.0]
-        })
-
+        
+        should_pay, actually_paid = simple_transfer_dfs
         result = amount_to_transfer(should_pay, actually_paid)
 
         assert len(result) == 1
@@ -79,3 +85,10 @@ class TestAmountToTransfer:
             amount_to_transfer(should_pay, actually_paid)
         assert "actually_paid_df must have columns" in str(exc_info.value)
         assert exc_info.type == ValueError
+
+    def test_output_columns(self, simple_transfer_dfs):
+        """Test that output has correct column names."""
+        should_pay, actually_paid = simple_transfer_dfs
+        result = amount_to_transfer(should_pay, actually_paid)
+        
+        assert set(result.columns) == {'sender', 'receiver', 'amount'}

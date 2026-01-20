@@ -32,6 +32,18 @@ class TestIndividualTotalPayments:
             'tip_pct': [0.0, 0.0, 0.0]
         })
     
+    @pytest.fixture
+    def tax_tip_df(self):
+        """Create a dataframe with tax and tip."""
+        return pd.DataFrame({
+            'payer': ['Leo', 'Ana'],
+            'item_name': ['dinner', 'drinks'],
+            'item_price': [100.0, 50.0],
+            'shared_by': ['Leo;Ana', 'Leo;Ana'],
+            'tax_pct': [0.10, 0.05],
+            'tip_pct': [0.20, 0.15]
+        })
+
     def test_input_type_validation(self):
         """Test that function raises TypeError for invalid input type."""
         with pytest.raises(TypeError):
@@ -61,6 +73,19 @@ class TestIndividualTotalPayments:
         
         assert leo_paid == 50.0
         assert ana_paid == 20.0
+
+    def test_tax_and_tip_applied(self, tax_tip_df):
+        """Test that tax and tip are correctly applied."""
+        result = individual_total_payments(tax_tip_df)
+        
+        # [item_price] * (1 + [tax_pct] + [tip_pct])
+        # Leo's dinner: 100 * (1 + 0.10 + 0.20) = 130
+        # Ana's drinks: 50 * (1 + 0.05 + 0.15) = 60
+        leo_paid = result[result['name'] == 'Leo']['actually_paid'].values[0]
+        ana_paid = result[result['name'] == 'Ana']['actually_paid'].values[0]
+        
+        assert abs(leo_paid - 130.0) < 0.01
+        assert abs(ana_paid - 60.0) < 0.01
 
     def test_returns_correct_column_names(self, simple_df):
         """Test that output has correct column names."""

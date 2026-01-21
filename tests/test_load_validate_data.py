@@ -82,3 +82,9 @@ def test_load_validate_data_negative_price(tmp_path):
     with pytest.raises(ValueError):
         load_validate_data(csv_path)
 
+def test_load_validate_data_nonexistent_path():
+    """
+    Loading a non-existent file path should raise an exception.
+    """
+    with pytest.raises(Exception):
+        load_validate_data("this/does/not/exist.csv")

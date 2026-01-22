@@ -24,7 +24,7 @@ def load_validate_data(csv_path):
     0   Amy      pasta           10.0        Amy           0.12     0.15
     1   Sam      taxi            25.0        Amy;Sam;Ben   0.07     0.0
     2   Ben      double-room     20.0        Amy;Ben       0.12     0.15
-    
+
     """
     valid_df = pd.read_csv(csv_path)
     required_cols = {"payer", "item_name", "item_price", "shared_by", "tax_pct", "tip_pct",}

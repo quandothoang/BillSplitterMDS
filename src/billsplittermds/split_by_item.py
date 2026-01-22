@@ -5,8 +5,8 @@ import pandas as pd
 
 def split_by_item(valid_df):
     """
-    Calculates a derived column called individual_price, which is the amount 
-    of this item that an individual should pay after splitting the bill evenly among 
+    Calculates a derived column called individual_price, which is the amount
+    of this item that an individual should pay after splitting the bill evenly among
     all people who consumed this item. Then we sum each person’s individual_price
     to get the total amount that this individual should pay. In brief, this function calculates
     how much each individual needs to pay in total during the trip after splitting the bill
@@ -15,7 +15,7 @@ def split_by_item(valid_df):
     Parameters
     ----------
     valid_df : pandas.DataFrame
-        A dataframe after being validated with columns 'payer', 
+        A dataframe after being validated with columns 'payer',
         'item_name', 'item_price', 'shared_by', 'tax_pct', and 'tip_pct'.
 
     Returns
@@ -35,15 +35,15 @@ def split_by_item(valid_df):
         name         should_pay
     0   Ana          38.775
     1   Leo          26.075
-    
+
     """
     # create `num_shared_people` and `individual_price` column inside `valid_df`
     valid_df['num_shared_people'] = 1 + valid_df['shared_by'].str.count(";")
-    valid_df['individual_price'] = (valid_df['item_price'] 
-                                    * (1 + valid_df['tax_pct'] + valid_df['tip_pct']) 
+    valid_df['individual_price'] = (valid_df['item_price']
+                                    * (1 + valid_df['tax_pct'] + valid_df['tip_pct'])
                                     / valid_df['num_shared_people'])
 
-    # get a list of the unique names of consumers 
+    # get a list of the unique names of consumers
     # who appear in the `shared_by` column at least once
     all_consumers = set()
     for people in valid_df['shared_by']:
@@ -62,4 +62,4 @@ def split_by_item(valid_df):
         should_pay_df.loc[i, 'should_pay'] = amt_should_pay
 
     return should_pay_df
-    
+

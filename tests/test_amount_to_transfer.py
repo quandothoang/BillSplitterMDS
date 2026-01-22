@@ -1,7 +1,7 @@
 """Tests for amount_to_transfer function."""
 
-import pytest
 import pandas as pd
+import pytest
 
 from billsplittermds.amount_to_transfer import amount_to_transfer
 
@@ -21,7 +21,7 @@ class TestAmountToTransfer:
             'actually_paid': [100.0, 0.0]
         })
         return should_pay, actually_paid
-    
+
     def test_no_transfers_when_balanced(self):
         """Test that no transfers are needed when everyone paid their share."""
         should_pay = pd.DataFrame({
@@ -40,7 +40,7 @@ class TestAmountToTransfer:
 
     def test_simple_transfer(self, simple_transfer_dfs):
         """Test simple case where one person owes another."""
-        
+
         should_pay, actually_paid = simple_transfer_dfs
         result = amount_to_transfer(should_pay, actually_paid)
 
@@ -90,5 +90,5 @@ class TestAmountToTransfer:
         """Test that output has correct column names."""
         should_pay, actually_paid = simple_transfer_dfs
         result = amount_to_transfer(should_pay, actually_paid)
-                
+
         assert set(result.columns) == {'sender', 'receiver', 'amount'}

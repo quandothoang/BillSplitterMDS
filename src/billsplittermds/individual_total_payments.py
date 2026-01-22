@@ -24,7 +24,6 @@ def individual_total_payments(valid_df):
     Examples
     --------
     >>> valid_df
-
         payer   item_name  item_price  shared_by  tax_pct  tip_pct
     0   Leo     candy      10.0        Leo        0.12     0.15
     1   Leo     taxi       25.0        Leo;Ana    0.07     0.0

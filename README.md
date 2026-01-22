@@ -56,7 +56,7 @@ Then there will be a window popped up in your browser showing the rendered docum
 
 GitHub pages have been set up to automate deployment. Please go to this URL to see the rendered webpage:
 
-https://ubc-mds.github.io/BillSplitterMDS/
+https://ubc-mds.github.io/BillSplitterMDS/reference/
 
 ## Functions
 

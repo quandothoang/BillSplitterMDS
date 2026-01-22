@@ -5,6 +5,7 @@ import pandas as pd
 
 def load_validate_data(csv_path):
     """
+    Read in a csv dataset through its path and validate its values
 
     Parameters
     ----------

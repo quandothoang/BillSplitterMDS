@@ -6,11 +6,57 @@ A Python package to help groups split trip bills fairly among participants.
 
 When a group of people travel together, different people often pay for different expenses throughout the trip. At the end, it can be complicated to figure out how much each person actually owes and how money should be transferred to settle all debts fairly. **BillSplitterMDS** simplifies this process by reading expense data from a CSV file and calculating the optimal transfers needed to balance everyone's contributions.
 
+## Create the project environment
+
+Please run the following command in bash terminal:
+
+```bash
+conda env create -f environment.yml
+```
+
+After the environment is created, activate it through the following:
+
+```bash
+conda activate billsplittermds
+```
+
 ## Installation
+
+Please change the directory to the root directory and run:
 
 ```bash
 pip install billsplittermds
 ```
+
+## Running the function tests
+
+To verify that each of the functions work appropriately, function tests are written in python scripts. To run these tests go to the root project directory in the terminal and write the following command:
+
+```
+pytest tests/
+```
+
+## Build documentation
+
+Please go to the root directory first and run:
+
+```bash
+quartodoc build
+```
+
+Following that, run another command:
+
+```bash
+quarto preview
+```
+
+Then there will be a window popped up in your browser showing the rendered documentation webpage.
+
+## Deploy documentation
+
+GitHub pages have been set up to automate deployment. Please go to this URL to see the rendered webpage:
+
+https://ubc-mds.github.io/BillSplitterMDS/
 
 ## Functions
 
@@ -67,14 +113,6 @@ actually_paid = individual_total_payments(df)
 # Get the transfers needed to settle up
 transfers = amount_to_transfer(should_pay, actually_paid)
 print(transfers)
-```
-
-## Running the function tests
-
-1. To verify that each of the functions work appropriately, function tests are written in python scripts. To run these tests go to the root project directory in the terminal and write the following command:
-
-```
-pytest tests/
 ```
 
 ## Python Ecosystem

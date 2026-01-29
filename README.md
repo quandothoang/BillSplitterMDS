@@ -1,5 +1,12 @@
 # BillSplitterMDS
 
+
+[![build](https://github.com/UBC-MDS/BillSplitterMDS/actions/workflows/build.yml/badge.svg)](https://github.com/UBC-MDS/BillSplitterMDS/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/UBC-MDS/BillSplitterMDS/branch/main/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/BillSplitterMDS)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://ubc-mds.github.io/BillSplitterMDS/)
+[![Python](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Python package to help groups split trip bills fairly among participants.
 
 ## Summary
@@ -25,8 +32,15 @@ conda activate billsplittermds
 Please change the directory to the root directory and run:
 
 ```bash
-pip install billsplittermds
+pip install -i https://test.pypi.org/simple/ billsplittermds
 ```
+
+If the above does not work, use the following (reccomended):
+
+```bash
+pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ billsplittermds
+```
+
 
 ## Running the function tests
 

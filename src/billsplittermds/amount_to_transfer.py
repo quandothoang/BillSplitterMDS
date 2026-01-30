@@ -1,7 +1,9 @@
 """Module for calculating money transfers to settle debts."""
 
-import pandas as pd
 from decimal import Decimal
+
+import pandas as pd
+
 
 CENT = Decimal("0.01")
 

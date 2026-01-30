@@ -35,7 +35,7 @@ Please change the directory to the root directory and run:
 pip install -i https://test.pypi.org/simple/ billsplittermds
 ```
 
-If the above does not work, use the following (reccomended):
+If the above does not work, use the following (recommended):
 
 ```bash
 pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ billsplittermds
@@ -152,3 +152,5 @@ There are several expense-splitting apps and packages available:
 ## License
 
 MIT License
+
+<!-- Dev workflow proof commit -->

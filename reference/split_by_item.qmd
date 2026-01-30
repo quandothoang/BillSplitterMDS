@@ -8,7 +8,7 @@ Module for calculating how much each person should pay.
 
 | Name | Description |
 | --- | --- |
-| [split_by_item](#billsplittermds.split_by_item.split_by_item) | Calculates a derived column called individual_price, which is the amount  |
+| [split_by_item](#billsplittermds.split_by_item.split_by_item) | Calculates a derived column called individual_price, which is the amount |
 
 ### split_by_item { #billsplittermds.split_by_item.split_by_item }
 
@@ -16,8 +16,8 @@ Module for calculating how much each person should pay.
 split_by_item.split_by_item(valid_df)
 ```
 
-Calculates a derived column called individual_price, which is the amount 
-of this item that an individual should pay after splitting the bill evenly among 
+Calculates a derived column called individual_price, which is the amount
+of this item that an individual should pay after splitting the bill evenly among
 all people who consumed this item. Then we sum each person’s individual_price
 to get the total amount that this individual should pay. In brief, this function calculates
 how much each individual needs to pay in total during the trip after splitting the bill
@@ -25,9 +25,9 @@ by item.
 
 #### Parameters {.doc-section .doc-section-parameters}
 
-| Name     | Type             | Description                                                                                                                | Default    |
-|----------|------------------|----------------------------------------------------------------------------------------------------------------------------|------------|
-| valid_df | pandas.DataFrame | A dataframe after being validated with columns 'payer',  'item_name', 'item_price', 'shared_by', 'tax_pct', and 'tip_pct'. | _required_ |
+| Name     | Type             | Description                                                                                                               | Default    |
+|----------|------------------|---------------------------------------------------------------------------------------------------------------------------|------------|
+| valid_df | pandas.DataFrame | A dataframe after being validated with columns 'payer', 'item_name', 'item_price', 'shared_by', 'tax_pct', and 'tip_pct'. | _required_ |
 
 #### Returns {.doc-section .doc-section-returns}
 

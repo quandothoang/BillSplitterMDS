@@ -6,6 +6,7 @@
     "section": "",
     "text": "split_by_item\nModule for calculating how much each person should pay.\n\n\n\n\n\nName\nDescription\n\n\n\n\nsplit_by_item\nCalculates a derived column called individual_price, which is the amount\n\n\n\n\n\nsplit_by_item.split_by_item(valid_df)\nCalculates a derived column called individual_price, which is the amount of this item that an individual should pay after splitting the bill evenly among all people who consumed this item. Then we sum each person’s individual_price to get the total amount that this individual should pay. In brief, this function calculates how much each individual needs to pay in total during the trip after splitting the bill by item.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nvalid_df\npandas.DataFrame\nA dataframe after being validated with columns ‘payer’, ‘item_name’, ‘item_price’, ‘shared_by’, ‘tax_pct’, and ‘tip_pct’.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nshould_pay_df\npandas.DataFrame\nDataframe with columns ‘individual’ and ‘should_pay’.\n\n\n\n\n\n\n&gt;&gt;&gt; valid_df\n    payer   item_name  item_price  shared_by  tax_pct  tip_pct\n0   Leo     candy      10.0        Leo        0.12     0.15\n1   Leo     taxi       25.0        Leo;Ana    0.07     0.0\n2   Ana     lunch      20.0        Ana        0.12     0.15\n&gt;&gt;&gt; split_by_item(valid_df)\n    name         should_pay\n0   Ana          38.775\n1   Leo          26.075",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "split_by_item"
     ]
@@ -17,6 +18,7 @@
     "section": "",
     "text": "Name\nDescription\n\n\n\n\nsplit_by_item\nCalculates a derived column called individual_price, which is the amount\n\n\n\n\n\nsplit_by_item.split_by_item(valid_df)\nCalculates a derived column called individual_price, which is the amount of this item that an individual should pay after splitting the bill evenly among all people who consumed this item. Then we sum each person’s individual_price to get the total amount that this individual should pay. In brief, this function calculates how much each individual needs to pay in total during the trip after splitting the bill by item.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nvalid_df\npandas.DataFrame\nA dataframe after being validated with columns ‘payer’, ‘item_name’, ‘item_price’, ‘shared_by’, ‘tax_pct’, and ‘tip_pct’.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nshould_pay_df\npandas.DataFrame\nDataframe with columns ‘individual’ and ‘should_pay’.\n\n\n\n\n\n\n&gt;&gt;&gt; valid_df\n    payer   item_name  item_price  shared_by  tax_pct  tip_pct\n0   Leo     candy      10.0        Leo        0.12     0.15\n1   Leo     taxi       25.0        Leo;Ana    0.07     0.0\n2   Ana     lunch      20.0        Ana        0.12     0.15\n&gt;&gt;&gt; split_by_item(valid_df)\n    name         should_pay\n0   Ana          38.775\n1   Leo          26.075",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "split_by_item"
     ]
@@ -28,6 +30,7 @@
     "section": "",
     "text": "A package of functions to split bills and manage transfers.\n\n\n\nload_validate_data\nModule for loading and validating bill data from CSV files.\n\n\nsplit_by_item\nModule for calculating how much each person should pay.\n\n\nindividual_total_payments\nModule for calculating how much each person actually paid.\n\n\namount_to_transfer\nModule for calculating money transfers to settle debts.",
     "crumbs": [
+      "Reference",
       "Function reference"
     ]
   },
@@ -38,6 +41,7 @@
     "section": "",
     "text": "A package of functions to split bills and manage transfers.\n\n\n\nload_validate_data\nModule for loading and validating bill data from CSV files.\n\n\nsplit_by_item\nModule for calculating how much each person should pay.\n\n\nindividual_total_payments\nModule for calculating how much each person actually paid.\n\n\namount_to_transfer\nModule for calculating money transfers to settle debts.",
     "crumbs": [
+      "Reference",
       "Function reference"
     ]
   },
@@ -48,6 +52,7 @@
     "section": "",
     "text": "individual_total_payments\nModule for calculating how much each person actually paid.\n\n\n\n\n\nName\nDescription\n\n\n\n\nindividual_total_payments\nCalculate the net amount to pay per item and return a dataframe with the total payment amount per person.\n\n\n\n\n\nindividual_total_payments.individual_total_payments(valid_df)\nCalculate the net amount to pay per item and return a dataframe with the total payment amount per person.\nFirst, this function takes in valid payments dataframe and derives a new column ‘item_paymant’ which is the total cost of each item including tax and tip. Then, it groups the datafram by the person who originally paid for the item and sums up the cost.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nvalid_df\npandas.DataFrame\nA dataframe containing validated data read from the input CSV file. Typically the output of load_validate_data() function.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nactually_paid_df\npandas.DataFrame\nDataframe with columns ‘payer’ and ‘actually_paid’.\n\n\n\n\n\n\n&gt;&gt;&gt; valid_df\n    payer   item_name  item_price  shared_by  tax_pct  tip_pct\n0   Leo     candy      10.0        Leo        0.12     0.15\n1   Leo     taxi       25.0        Leo;Ana    0.07     0.0\n2   Ana     lunch      20.0        Ana        0.12     0.15\n&gt;&gt;&gt; individual_total_payments(valid_df)\n    name   actually_paid\n0   Leo     39.45\n1   Ana     25.40",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "individual_total_payments"
     ]
@@ -59,9 +64,164 @@
     "section": "",
     "text": "Name\nDescription\n\n\n\n\nindividual_total_payments\nCalculate the net amount to pay per item and return a dataframe with the total payment amount per person.\n\n\n\n\n\nindividual_total_payments.individual_total_payments(valid_df)\nCalculate the net amount to pay per item and return a dataframe with the total payment amount per person.\nFirst, this function takes in valid payments dataframe and derives a new column ‘item_paymant’ which is the total cost of each item including tax and tip. Then, it groups the datafram by the person who originally paid for the item and sums up the cost.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nvalid_df\npandas.DataFrame\nA dataframe containing validated data read from the input CSV file. Typically the output of load_validate_data() function.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nactually_paid_df\npandas.DataFrame\nDataframe with columns ‘payer’ and ‘actually_paid’.\n\n\n\n\n\n\n&gt;&gt;&gt; valid_df\n    payer   item_name  item_price  shared_by  tax_pct  tip_pct\n0   Leo     candy      10.0        Leo        0.12     0.15\n1   Leo     taxi       25.0        Leo;Ana    0.07     0.0\n2   Ana     lunch      20.0        Ana        0.12     0.15\n&gt;&gt;&gt; individual_total_payments(valid_df)\n    name   actually_paid\n0   Leo     39.45\n1   Ana     25.40",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "individual_total_payments"
     ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "2025-26 DSCI-524 Group 14 - A Python package to help groups split trip bills fairly among participants.\n  \n\n\nWhen a group of people travel together, different people often pay for different expenses throughout the trip. At the end, it can be complicated to figure out how much each person actually owes and how money should be transferred to settle all debts fairly.\nBillSplitterMDS simplifies this process by:\n\nReading expense data from a CSV file\nValidating the data (checking tax/tip ranges, required columns)\nCalculating how much each person should pay based on shared items\nCalculating how much each person actually paid\nComputing the optimal transfers needed to balance everyone’s contributions\n\n\n\n\nInstall from TestPyPI:\npip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ billsplittermds\nOr install from source:\ngit clone https://github.com/UBC-MDS/BillSplitterMDS.git\ncd BillSplitterMDS\npip install -e .\n\n\n\nHere’s a complete example showing how to use all four functions in the package.\n\n\nFirst, let’s create a sample CSV file with trip expenses:\n\nimport pandas as pd\n\n# Create sample trip expense data\ndata = {\n    'payer': ['Amy', 'Sam', 'Ben', 'Amy'],\n    'item_name': ['Pasta Dinner', 'Taxi to Airport', 'Hotel Room', 'Drinks'],\n    'item_price': [18.0, 40.0, 200.0, 30.0],\n    'shared_by': ['Amy', 'Amy;Sam;Ben', 'Amy;Ben', 'Amy;Sam;Ben'],\n    'tax_pct': [0.08, 0.08, 0.10, 0.08],\n    'tip_pct': [0.15, 0.10, 0.00, 0.18]\n}\n\n# Save to CSV\ndf = pd.DataFrame(data)\ndf.to_csv('trip_expenses.csv', index=False)\nprint(\"Sample CSV created:\")\nprint(df.to_string(index=False))\n\nSample CSV created:\npayer       item_name  item_price   shared_by  tax_pct  tip_pct\n  Amy    Pasta Dinner        18.0         Amy     0.08     0.15\n  Sam Taxi to Airport        40.0 Amy;Sam;Ben     0.08     0.10\n  Ben      Hotel Room       200.0     Amy;Ben     0.10     0.00\n  Amy          Drinks        30.0 Amy;Sam;Ben     0.08     0.18\n\n\n\n\n\nUse load_validate_data() to read the CSV and validate that all values are within acceptable ranges:\n\nfrom billsplittermds import load_validate_data\n\n# Load and validate the expense data\nvalid_df = load_validate_data('trip_expenses.csv')\nprint(\"Data loaded and validated successfully!\")\nprint(f\"  - {len(valid_df)} expense records\")\nprint(f\"  - Tax range: {valid_df['tax_pct'].min():.0%} to {valid_df['tax_pct'].max():.0%}\")\nprint(f\"  - Tip range: {valid_df['tip_pct'].min():.0%} to {valid_df['tip_pct'].max():.0%}\")\n\nData loaded and validated successfully!\n  - 4 expense records\n  - Tax range: 8% to 10%\n  - Tip range: 0% to 18%\n\n\n\n\n\nUse split_by_item() to calculate each person’s fair share based on which items they consumed:\n\nfrom billsplittermds import split_by_item\n\n# Calculate what each person should pay\nshould_pay = split_by_item(valid_df)\nprint(\"\\nWhat each person SHOULD pay (based on items consumed):\")\nprint(should_pay.to_string(index=False))\nprint(f\"\\nTotal: ${should_pay['should_pay'].sum():.2f}\")\n\n\nWhat each person SHOULD pay (based on items consumed):\nname  should_pay\n Ben  138.333333\n Sam   28.333333\n Amy  160.473333\n\nTotal: $327.14\n\n\n\n\n\nUse individual_total_payments() to sum up what each person actually spent:\n\nfrom billsplittermds import individual_total_payments\n\n# Calculate what each person actually paid\nactually_paid = individual_total_payments(valid_df)\nprint(\"\\nWhat each person ACTUALLY paid (who paid the bills):\")\nprint(actually_paid.to_string(index=False))\nprint(f\"\\nTotal: ${actually_paid['actually_paid'].sum():.2f}\")\n\n\nWhat each person ACTUALLY paid (who paid the bills):\nname  actually_paid\n Amy          59.94\n Ben         220.00\n Sam          47.20\n\nTotal: $327.14\n\n\n\n\n\nUse amount_to_transfer() to determine who owes money to whom:\n\nfrom billsplittermds import amount_to_transfer\n\n# Calculate the transfers needed to settle up\ntransfers = amount_to_transfer(should_pay, actually_paid)\nprint(\"\\nTransfers needed to settle all debts:\")\nif len(transfers) == 0:\n    print(\"  No transfers needed - everyone is settled!\")\nelse:\n    for _, row in transfers.iterrows():\n        print(f\"  {row['sender']} -&gt; {row['receiver']}: ${row['amount']:.2f}\")\n\n\nTransfers needed to settle all debts:\n  Amy -&gt; Ben: $81.67\n  Amy -&gt; Sam: $18.87\n\n\n\n\n\n\n# Clean up the sample file\nimport os\nos.remove('trip_expenses.csv')\nprint(\"\\nDemo complete! Sample file cleaned up.\")\n\n\nDemo complete! Sample file cleaned up.\n\n\n\n\n\n\nYour CSV file must have these columns:\n\n\n\nColumn\nDescription\nValid Range\nExample\n\n\n\n\npayer\nName of person who paid\nAny string\nAmy\n\n\nitem_name\nDescription of expense\nAny string\nPasta\n\n\nitem_price\nPrice before tax/tip\n&gt;= 0\n18.00\n\n\nshared_by\nNames separated by semicolons\nAny string\nAmy;Ben\n\n\ntax_pct\nTax as decimal\n0.05 to 0.15\n0.08\n\n\ntip_pct\nTip as decimal\n0.00 to 0.50\n0.15\n\n\n\n\n\n\nSee the API Reference for detailed function documentation including parameters, return types, and examples.\n\n\n\nInterested in contributing? Check out the Contributing Guidelines and Code of Conduct.\n\n\n\nBillSplitterMDS is licensed under the MIT License."
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "When a group of people travel together, different people often pay for different expenses throughout the trip. At the end, it can be complicated to figure out how much each person actually owes and how money should be transferred to settle all debts fairly.\nBillSplitterMDS simplifies this process by:\n\nReading expense data from a CSV file\nValidating the data (checking tax/tip ranges, required columns)\nCalculating how much each person should pay based on shared items\nCalculating how much each person actually paid\nComputing the optimal transfers needed to balance everyone’s contributions"
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "Install from TestPyPI:\npip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ billsplittermds\nOr install from source:\ngit clone https://github.com/UBC-MDS/BillSplitterMDS.git\ncd BillSplitterMDS\npip install -e ."
+  },
+  {
+    "objectID": "index.html#full-usage-demonstration",
+    "href": "index.html#full-usage-demonstration",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "Here’s a complete example showing how to use all four functions in the package.\n\n\nFirst, let’s create a sample CSV file with trip expenses:\n\nimport pandas as pd\n\n# Create sample trip expense data\ndata = {\n    'payer': ['Amy', 'Sam', 'Ben', 'Amy'],\n    'item_name': ['Pasta Dinner', 'Taxi to Airport', 'Hotel Room', 'Drinks'],\n    'item_price': [18.0, 40.0, 200.0, 30.0],\n    'shared_by': ['Amy', 'Amy;Sam;Ben', 'Amy;Ben', 'Amy;Sam;Ben'],\n    'tax_pct': [0.08, 0.08, 0.10, 0.08],\n    'tip_pct': [0.15, 0.10, 0.00, 0.18]\n}\n\n# Save to CSV\ndf = pd.DataFrame(data)\ndf.to_csv('trip_expenses.csv', index=False)\nprint(\"Sample CSV created:\")\nprint(df.to_string(index=False))\n\nSample CSV created:\npayer       item_name  item_price   shared_by  tax_pct  tip_pct\n  Amy    Pasta Dinner        18.0         Amy     0.08     0.15\n  Sam Taxi to Airport        40.0 Amy;Sam;Ben     0.08     0.10\n  Ben      Hotel Room       200.0     Amy;Ben     0.10     0.00\n  Amy          Drinks        30.0 Amy;Sam;Ben     0.08     0.18\n\n\n\n\n\nUse load_validate_data() to read the CSV and validate that all values are within acceptable ranges:\n\nfrom billsplittermds import load_validate_data\n\n# Load and validate the expense data\nvalid_df = load_validate_data('trip_expenses.csv')\nprint(\"Data loaded and validated successfully!\")\nprint(f\"  - {len(valid_df)} expense records\")\nprint(f\"  - Tax range: {valid_df['tax_pct'].min():.0%} to {valid_df['tax_pct'].max():.0%}\")\nprint(f\"  - Tip range: {valid_df['tip_pct'].min():.0%} to {valid_df['tip_pct'].max():.0%}\")\n\nData loaded and validated successfully!\n  - 4 expense records\n  - Tax range: 8% to 10%\n  - Tip range: 0% to 18%\n\n\n\n\n\nUse split_by_item() to calculate each person’s fair share based on which items they consumed:\n\nfrom billsplittermds import split_by_item\n\n# Calculate what each person should pay\nshould_pay = split_by_item(valid_df)\nprint(\"\\nWhat each person SHOULD pay (based on items consumed):\")\nprint(should_pay.to_string(index=False))\nprint(f\"\\nTotal: ${should_pay['should_pay'].sum():.2f}\")\n\n\nWhat each person SHOULD pay (based on items consumed):\nname  should_pay\n Ben  138.333333\n Sam   28.333333\n Amy  160.473333\n\nTotal: $327.14\n\n\n\n\n\nUse individual_total_payments() to sum up what each person actually spent:\n\nfrom billsplittermds import individual_total_payments\n\n# Calculate what each person actually paid\nactually_paid = individual_total_payments(valid_df)\nprint(\"\\nWhat each person ACTUALLY paid (who paid the bills):\")\nprint(actually_paid.to_string(index=False))\nprint(f\"\\nTotal: ${actually_paid['actually_paid'].sum():.2f}\")\n\n\nWhat each person ACTUALLY paid (who paid the bills):\nname  actually_paid\n Amy          59.94\n Ben         220.00\n Sam          47.20\n\nTotal: $327.14\n\n\n\n\n\nUse amount_to_transfer() to determine who owes money to whom:\n\nfrom billsplittermds import amount_to_transfer\n\n# Calculate the transfers needed to settle up\ntransfers = amount_to_transfer(should_pay, actually_paid)\nprint(\"\\nTransfers needed to settle all debts:\")\nif len(transfers) == 0:\n    print(\"  No transfers needed - everyone is settled!\")\nelse:\n    for _, row in transfers.iterrows():\n        print(f\"  {row['sender']} -&gt; {row['receiver']}: ${row['amount']:.2f}\")\n\n\nTransfers needed to settle all debts:\n  Amy -&gt; Ben: $81.67\n  Amy -&gt; Sam: $18.87\n\n\n\n\n\n\n# Clean up the sample file\nimport os\nos.remove('trip_expenses.csv')\nprint(\"\\nDemo complete! Sample file cleaned up.\")\n\n\nDemo complete! Sample file cleaned up."
+  },
+  {
+    "objectID": "index.html#input-csv-format",
+    "href": "index.html#input-csv-format",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "Your CSV file must have these columns:\n\n\n\nColumn\nDescription\nValid Range\nExample\n\n\n\n\npayer\nName of person who paid\nAny string\nAmy\n\n\nitem_name\nDescription of expense\nAny string\nPasta\n\n\nitem_price\nPrice before tax/tip\n&gt;= 0\n18.00\n\n\nshared_by\nNames separated by semicolons\nAny string\nAmy;Ben\n\n\ntax_pct\nTax as decimal\n0.05 to 0.15\n0.08\n\n\ntip_pct\nTip as decimal\n0.00 to 0.50\n0.15"
+  },
+  {
+    "objectID": "index.html#api-reference",
+    "href": "index.html#api-reference",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "See the API Reference for detailed function documentation including parameters, return types, and examples."
+  },
+  {
+    "objectID": "index.html#contributing",
+    "href": "index.html#contributing",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "Interested in contributing? Check out the Contributing Guidelines and Code of Conduct."
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "BillSplitterMDS",
+    "section": "",
+    "text": "BillSplitterMDS is licensed under the MIT License."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html",
+    "href": "CODE_OF_CONDUCT.html",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. We value openness, creativity, honesty and hard work, and we try our best to ensure every voice is heard and respected.\n\n\n\nExamples of behavior that contributes to creating a positive environment include:\n\nUsing welcoming and inclusive language\nBeing respectful of differing viewpoints and experiences\nGracefully accepting constructive criticism\nFocusing on what is best for the community\nShowing empathy towards other community members\n\nExamples of unacceptable behavior by participants include:\n\nThe use of sexualized language or imagery and unwelcome sexual attention or advances\nTrolling, insulting/derogatory comments, and personal or political attacks\nPublic or private harassment\nLeaking other members’ private information to the public, either for personal or business purposes, without explicit permission\nOther conduct which could reasonably be considered inappropriate in a professional setting\n\n\n\n\nProject maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.\nProject maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.\n\n\n\nThis Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.\n\n\n\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.\nProject maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project’s leadership.\n\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html, and from the [Contributor Covenant][homepage], version 2.0, available at https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.\nCommunity Impact Guidelines were inspired by Mozilla’s code of conduct enforcement ladder."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#our-pledge",
+    "href": "CODE_OF_CONDUCT.html#our-pledge",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation. We value openness, creativity, honesty and hard work, and we try our best to ensure every voice is heard and respected."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#our-standards",
+    "href": "CODE_OF_CONDUCT.html#our-standards",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "Examples of behavior that contributes to creating a positive environment include:\n\nUsing welcoming and inclusive language\nBeing respectful of differing viewpoints and experiences\nGracefully accepting constructive criticism\nFocusing on what is best for the community\nShowing empathy towards other community members\n\nExamples of unacceptable behavior by participants include:\n\nThe use of sexualized language or imagery and unwelcome sexual attention or advances\nTrolling, insulting/derogatory comments, and personal or political attacks\nPublic or private harassment\nLeaking other members’ private information to the public, either for personal or business purposes, without explicit permission\nOther conduct which could reasonably be considered inappropriate in a professional setting"
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#our-responsibilities",
+    "href": "CODE_OF_CONDUCT.html#our-responsibilities",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.\nProject maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#scope",
+    "href": "CODE_OF_CONDUCT.html#scope",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#enforcement",
+    "href": "CODE_OF_CONDUCT.html#enforcement",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.\nProject maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project’s leadership."
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#attribution",
+    "href": "CODE_OF_CONDUCT.html#attribution",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "This Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html, and from the [Contributor Covenant][homepage], version 2.0, available at https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.\nCommunity Impact Guidelines were inspired by Mozilla’s code of conduct enforcement ladder."
+  },
+  {
+    "objectID": "reflection.html",
+    "href": "reflection.html",
+    "title": "Development Tools & Practices Reflection",
+    "section": "",
+    "text": "This page discusses the tools, GitHub infrastructure, and organizational practices used in developing BillSplitterMDS, along with recommendations for scaling projects.\n\n\n\n\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\nGit\nDistributed version control for tracking changes\n\n\nGitHub\nRepository hosting, issue tracking, project boards, code review\n\n\nGitHub Actions\nCI/CD automation for testing, linting, and deployment\n\n\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\npytest\nUnit testing framework for Python\n\n\npytest-cov\nCode coverage measurement\n\n\nCodecov\nCoverage tracking and reporting service\n\n\nruff\nFast Python linter for code style checking\n\n\n\n\n\n\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\nQuarto\nScientific and technical publishing system\n\n\nquartodoc\nAuto-generate API documentation from Python docstrings\n\n\nGitHub Pages\nFree hosting for documentation website\n\n\n\n\n\n\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\nhatchling\nModern Python build backend\n\n\ntwine\nPackage upload to PyPI/TestPyPI\n\n\nTestPyPI\nTesting package distribution before production release\n\n\n\n\n\n\n\n\n\nFor most development work, we followed GitHub Flow:\n\nCreate feature branch from main\nMake changes and commit with meaningful messages\nOpen pull request for code review\nAddress feedback from team members\nMerge to main after approval\n\nThis workflow is simple and effective for continuous deployment.\n\n\n\nFor coordinated feature sets requiring multiple PRs, we used Git Flow:\n\nCreate development branch from main\nCreate feature branches from development\nMerge features into development via reviewed PRs\nFinal merge of development into main\n\nThis provides a staging area to coordinate related changes before release.\n\n\n\n\nEvery PR requires at least one reviewer\nUse GitHub’s review features (comments, suggestions, approvals)\nCheck that CI passes before merging\nSquash commits for cleaner history when appropriate\n\n\n\n\n\nOur automated pipeline includes:\nPush/PR to main\n    │\n    ├── Run tests (pytest)\n    │\n    ├── Check code style (ruff)\n    │\n    ├── Measure coverage (pytest-cov)\n    │\n    └── Upload coverage (Codecov)\n\nRelease published\n    │\n    ├── Build package\n    │\n    └── Deploy to TestPyPI\n\n\n\nIf scaling this or another project, we recommend:\n\n\n\nAdd integration tests for end-to-end workflows\nAdd property-based testing with Hypothesis\nSet minimum coverage thresholds (e.g., 80%)\n\n\n\n\n\nAdd type hints to all functions\nUse mypy for static type checking\nInclude type checking in CI pipeline\n\n\n\n\n\nEnable Dependabot for dependency updates\nAdd secret scanning\nUse signed commits\n\n\n\n\n\nAdd more tutorials and use-case examples\nInclude contribution guidelines for new developers\nAdd changelog automation\n\n\n\n\n\nDeploy to production PyPI (not just TestPyPI)\nConsider Docker containers for reproducibility\nAdd staging environment for testing releases\n\n\n\n\n\nUse GitHub Projects for sprint planning\nAutomate issue triage with labels\nSet up milestone tracking and burndown charts\n\n\n\n\n\n\n\n\nEarly CI/CD setup: Catching issues early saved debugging time\nClear docstrings: Made quartodoc documentation generation smooth\nGitHub Issues: Helped track work and communicate asynchronously\nCode review: Improved code quality and shared knowledge\n\n\n\n\n\nCoordinating changes: Multiple people editing same files required communication\nDocumentation rendering: Quarto/quartodoc setup had learning curve\nVersion management: Keeping pyproject.toml and git tags in sync\n\n\n\n\n\nInvest time in tooling setup early - it pays dividends\nWrite tests as you code, not after\nDocument decisions in issues for future reference\nUse meaningful commit messages for easier debugging\n\n\n\n\n\nThe combination of GitHub Actions, pytest, ruff, and quartodoc provided a robust development infrastructure for BillSplitterMDS. These tools enabled automated quality checks, consistent code style, and professional documentation with minimal manual effort.\nFor future projects, we would maintain this toolset while adding type checking and expanding test coverage earlier in development."
+  },
+  {
+    "objectID": "reflection.html#tools-used",
+    "href": "reflection.html#tools-used",
+    "title": "Development Tools & Practices Reflection",
+    "section": "",
+    "text": "Tool\nPurpose\n\n\n\n\nGit\nDistributed version control for tracking changes\n\n\nGitHub\nRepository hosting, issue tracking, project boards, code review\n\n\nGitHub Actions\nCI/CD automation for testing, linting, and deployment\n\n\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\npytest\nUnit testing framework for Python\n\n\npytest-cov\nCode coverage measurement\n\n\nCodecov\nCoverage tracking and reporting service\n\n\nruff\nFast Python linter for code style checking\n\n\n\n\n\n\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\nQuarto\nScientific and technical publishing system\n\n\nquartodoc\nAuto-generate API documentation from Python docstrings\n\n\nGitHub Pages\nFree hosting for documentation website\n\n\n\n\n\n\n\n\n\n\n\n\n\nTool\nPurpose\n\n\n\n\nhatchling\nModern Python build backend\n\n\ntwine\nPackage upload to PyPI/TestPyPI\n\n\nTestPyPI\nTesting package distribution before production release"
+  },
+  {
+    "objectID": "reflection.html#workflow-practices",
+    "href": "reflection.html#workflow-practices",
+    "title": "Development Tools & Practices Reflection",
+    "section": "",
+    "text": "For most development work, we followed GitHub Flow:\n\nCreate feature branch from main\nMake changes and commit with meaningful messages\nOpen pull request for code review\nAddress feedback from team members\nMerge to main after approval\n\nThis workflow is simple and effective for continuous deployment.\n\n\n\nFor coordinated feature sets requiring multiple PRs, we used Git Flow:\n\nCreate development branch from main\nCreate feature branches from development\nMerge features into development via reviewed PRs\nFinal merge of development into main\n\nThis provides a staging area to coordinate related changes before release.\n\n\n\n\nEvery PR requires at least one reviewer\nUse GitHub’s review features (comments, suggestions, approvals)\nCheck that CI passes before merging\nSquash commits for cleaner history when appropriate"
+  },
+  {
+    "objectID": "reflection.html#cicd-pipeline",
+    "href": "reflection.html#cicd-pipeline",
+    "title": "Development Tools & Practices Reflection",
+    "section": "",
+    "text": "Our automated pipeline includes:\nPush/PR to main\n    │\n    ├── Run tests (pytest)\n    │\n    ├── Check code style (ruff)\n    │\n    ├── Measure coverage (pytest-cov)\n    │\n    └── Upload coverage (Codecov)\n\nRelease published\n    │\n    ├── Build package\n    │\n    └── Deploy to TestPyPI"
+  },
+  {
+    "objectID": "reflection.html#recommendations-for-scaling",
+    "href": "reflection.html#recommendations-for-scaling",
+    "title": "Development Tools & Practices Reflection",
+    "section": "",
+    "text": "If scaling this or another project, we recommend:\n\n\n\nAdd integration tests for end-to-end workflows\nAdd property-based testing with Hypothesis\nSet minimum coverage thresholds (e.g., 80%)\n\n\n\n\n\nAdd type hints to all functions\nUse mypy for static type checking\nInclude type checking in CI pipeline\n\n\n\n\n\nEnable Dependabot for dependency updates\nAdd secret scanning\nUse signed commits\n\n\n\n\n\nAdd more tutorials and use-case examples\nInclude contribution guidelines for new developers\nAdd changelog automation\n\n\n\n\n\nDeploy to production PyPI (not just TestPyPI)\nConsider Docker containers for reproducibility\nAdd staging environment for testing releases\n\n\n\n\n\nUse GitHub Projects for sprint planning\nAutomate issue triage with labels\nSet up milestone tracking and burndown charts"
+  },
+  {
+    "objectID": "reflection.html#lessons-learned",
+    "href": "reflection.html#lessons-learned",
+    "title": "Development Tools & Practices Reflection",
+    "section": "",
+    "text": "Early CI/CD setup: Catching issues early saved debugging time\nClear docstrings: Made quartodoc documentation generation smooth\nGitHub Issues: Helped track work and communicate asynchronously\nCode review: Improved code quality and shared knowledge\n\n\n\n\n\nCoordinating changes: Multiple people editing same files required communication\nDocumentation rendering: Quarto/quartodoc setup had learning curve\nVersion management: Keeping pyproject.toml and git tags in sync\n\n\n\n\n\nInvest time in tooling setup early - it pays dividends\nWrite tests as you code, not after\nDocument decisions in issues for future reference\nUse meaningful commit messages for easier debugging"
+  },
+  {
+    "objectID": "reflection.html#conclusion",
+    "href": "reflection.html#conclusion",
+    "title": "Development Tools & Practices Reflection",
+    "section": "",
+    "text": "The combination of GitHub Actions, pytest, ruff, and quartodoc provided a robust development infrastructure for BillSplitterMDS. These tools enabled automated quality checks, consistent code style, and professional documentation with minimal manual effort.\nFor future projects, we would maintain this toolset while adding type checking and expanding test coverage earlier in development."
   },
   {
     "objectID": "CONTRIBUTING.html",
@@ -106,61 +266,13 @@
     "text": "This contributing guide is adapted from general open-source best practices and GitHub Flow guidelines."
   },
   {
-    "objectID": "CONDUCT.html",
-    "href": "CONDUCT.html",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.\n\n\n\nExamples of behavior that contributes to creating a positive environment include:\n\nUsing welcoming and inclusive language\nBeing respectful of differing viewpoints and experiences\nGracefully accepting constructive criticism\nFocusing on what is best for the community\nShowing empathy towards other community members\n\nExamples of unacceptable behavior by participants include:\n\nThe use of sexualized language or imagery and unwelcome sexual attention or advances\nTrolling, insulting/derogatory comments, and personal or political attacks\nPublic or private harassment\nPublishing others’ private information, such as a physical or electronic address, without explicit permission\nOther conduct which could reasonably be considered inappropriate in a professional setting\n\n\n\n\nProject maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.\nProject maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.\n\n\n\nThis Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.\n\n\n\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.\nProject maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project’s leadership.\n\n\n\nThis Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html"
-  },
-  {
-    "objectID": "CONDUCT.html#our-pledge",
-    "href": "CONDUCT.html#our-pledge",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation."
-  },
-  {
-    "objectID": "CONDUCT.html#our-standards",
-    "href": "CONDUCT.html#our-standards",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "Examples of behavior that contributes to creating a positive environment include:\n\nUsing welcoming and inclusive language\nBeing respectful of differing viewpoints and experiences\nGracefully accepting constructive criticism\nFocusing on what is best for the community\nShowing empathy towards other community members\n\nExamples of unacceptable behavior by participants include:\n\nThe use of sexualized language or imagery and unwelcome sexual attention or advances\nTrolling, insulting/derogatory comments, and personal or political attacks\nPublic or private harassment\nPublishing others’ private information, such as a physical or electronic address, without explicit permission\nOther conduct which could reasonably be considered inappropriate in a professional setting"
-  },
-  {
-    "objectID": "CONDUCT.html#our-responsibilities",
-    "href": "CONDUCT.html#our-responsibilities",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.\nProject maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful."
-  },
-  {
-    "objectID": "CONDUCT.html#scope",
-    "href": "CONDUCT.html#scope",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers."
-  },
-  {
-    "objectID": "CONDUCT.html#enforcement",
-    "href": "CONDUCT.html#enforcement",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team. All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.\nProject maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project’s leadership."
-  },
-  {
-    "objectID": "CONDUCT.html#attribution",
-    "href": "CONDUCT.html#attribution",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "This Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html"
-  },
-  {
     "objectID": "reference/load_validate_data.html",
     "href": "reference/load_validate_data.html",
     "title": "load_validate_data",
     "section": "",
     "text": "load_validate_data\nModule for loading and validating bill data from CSV files.\n\n\n\n\n\nName\nDescription\n\n\n\n\nload_validate_data\nRead in a csv dataset through its path and validate its values\n\n\n\n\n\nload_validate_data.load_validate_data(csv_path)\nRead in a csv dataset through its path and validate its values\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ncsv_path\nstr\nThe string of path from which we read the raw data.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nvalid_df\npandas.DataFrame\nDataframe that is read and validated from the given path.\n\n\n\n\n\n\n&gt;&gt;&gt; load_validate_data(\"../../data/raw.csv\")\n    payer   item_name        item_price  shared_by     tax_pct  tip_pct\n0   Amy      pasta           10.0        Amy           0.12     0.15\n1   Sam      taxi            25.0        Amy;Sam;Ben   0.07     0.0\n2   Ben      double-room     20.0        Amy;Ben       0.12     0.15",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "load_validate_data"
     ]
@@ -172,6 +284,7 @@
     "section": "",
     "text": "Name\nDescription\n\n\n\n\nload_validate_data\nRead in a csv dataset through its path and validate its values\n\n\n\n\n\nload_validate_data.load_validate_data(csv_path)\nRead in a csv dataset through its path and validate its values\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ncsv_path\nstr\nThe string of path from which we read the raw data.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nvalid_df\npandas.DataFrame\nDataframe that is read and validated from the given path.\n\n\n\n\n\n\n&gt;&gt;&gt; load_validate_data(\"../../data/raw.csv\")\n    payer   item_name        item_price  shared_by     tax_pct  tip_pct\n0   Amy      pasta           10.0        Amy           0.12     0.15\n1   Sam      taxi            25.0        Amy;Sam;Ben   0.07     0.0\n2   Ben      double-room     20.0        Amy;Ben       0.12     0.15",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "load_validate_data"
     ]
@@ -183,6 +296,7 @@
     "section": "",
     "text": "amount_to_transfer\nModule for calculating money transfers to settle debts.\n\n\n\n\n\nName\nDescription\n\n\n\n\namount_to_transfer\nCompute money transfers required to settle individual balances.\n\n\n\n\n\namount_to_transfer.amount_to_transfer(should_pay_df, actually_paid_df)\nCompute money transfers required to settle individual balances.\nThis function takes the outputs of ‘split_by_item’ and ‘individual_total_payments’ functions and determines how much money should be transferred between individuals, so that each person’s final spending equals the amount they should have paid.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nshould_pay_df\npandas.DataFrame\nDataframe containing the amount each individual should pay according to splitting. Typically the output of ‘split_by_item’.\nrequired\n\n\nactually_paid_df\npandas.DataFrame\nDataframe containing the amount each individual actually paid. Typically the output of ‘individual_total_payments’.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nresult_df\npandas.DataFrame\nA dataframe describing the required transfers with the following columns: - ‘sender’ : name of the person who should send money - ‘receiver’ : name of the person who should receive money - ‘amount’ : amount of money to be transferred\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nValueError\nIf required columns are missing from input dataframes.\n\n\n\n\n\n\n&gt;&gt;&gt; should_pay_df\n    name   should_pay\n0   Leo     30.0\n1   Ana     30.0\n2   Mia     30.0\n&gt;&gt;&gt; actually_paid_df\n    name   actually_paid\n0   Leo     50.0\n1   Ana     40.0\n2   Mia     0.0\n&gt;&gt;&gt; amount_to_transfer(should_pay_df, actually_paid_df)\n    sender  receiver    amount\n0   Mia     Leo         20.0\n1   Mia     Ana         10.0",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "amount_to_transfer"
     ]
@@ -194,6 +308,7 @@
     "section": "",
     "text": "Name\nDescription\n\n\n\n\namount_to_transfer\nCompute money transfers required to settle individual balances.\n\n\n\n\n\namount_to_transfer.amount_to_transfer(should_pay_df, actually_paid_df)\nCompute money transfers required to settle individual balances.\nThis function takes the outputs of ‘split_by_item’ and ‘individual_total_payments’ functions and determines how much money should be transferred between individuals, so that each person’s final spending equals the amount they should have paid.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nshould_pay_df\npandas.DataFrame\nDataframe containing the amount each individual should pay according to splitting. Typically the output of ‘split_by_item’.\nrequired\n\n\nactually_paid_df\npandas.DataFrame\nDataframe containing the amount each individual actually paid. Typically the output of ‘individual_total_payments’.\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nresult_df\npandas.DataFrame\nA dataframe describing the required transfers with the following columns: - ‘sender’ : name of the person who should send money - ‘receiver’ : name of the person who should receive money - ‘amount’ : amount of money to be transferred\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nValueError\nIf required columns are missing from input dataframes.\n\n\n\n\n\n\n&gt;&gt;&gt; should_pay_df\n    name   should_pay\n0   Leo     30.0\n1   Ana     30.0\n2   Mia     30.0\n&gt;&gt;&gt; actually_paid_df\n    name   actually_paid\n0   Leo     50.0\n1   Ana     40.0\n2   Mia     0.0\n&gt;&gt;&gt; amount_to_transfer(should_pay_df, actually_paid_df)\n    sender  receiver    amount\n0   Mia     Leo         20.0\n1   Mia     Ana         10.0",
     "crumbs": [
+      "Reference",
       "Bill Splitter Functions",
       "amount_to_transfer"
     ]

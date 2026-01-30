@@ -18,7 +18,7 @@ individual_total_payments.individual_total_payments(valid_df)
 
 Calculate the net amount to pay per item and return a dataframe with the total payment amount per person.
 
-First, this function takes in valid payments dataframe and derives a new column 'item_paymant' which is the total cost of each item including tax and tip. 
+First, this function takes in valid payments dataframe and derives a new column 'item_paymant' which is the total cost of each item including tax and tip.
 Then, it groups the datafram by the person who originally paid for the item and sums up the cost.
 
 #### Parameters {.doc-section .doc-section-parameters}

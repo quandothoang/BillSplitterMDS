@@ -2,6 +2,15 @@ project:
   type: website
   output-dir: _site
 
+website:
+  title: "Bill Splitter - MDS"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: reference/index.qmd
+        text: Reference
+
 # tell quarto to read the generated sidebar
 metadata-files:
   - reference/_sidebar.yml

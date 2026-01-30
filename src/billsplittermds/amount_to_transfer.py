@@ -1,6 +1,9 @@
 """Module for calculating money transfers to settle debts."""
 
 import pandas as pd
+from decimal import Decimal
+
+CENT = Decimal("0.01")
 
 
 def amount_to_transfer(should_pay_df, actually_paid_df):
@@ -70,7 +73,9 @@ def amount_to_transfer(should_pay_df, actually_paid_df):
     merged_df['actually_paid'] = merged_df['actually_paid'].fillna(0)
 
     # Calculate balance: positive means overpaid (should receive), negative means underpaid (should send)
-    merged_df['balance'] = merged_df['actually_paid'] - merged_df['should_pay']
+    merged_df['balance'] = (
+    merged_df['actually_paid'].apply(lambda x: Decimal(str(x))) -
+    merged_df['should_pay'].apply(lambda x: Decimal(str(x))))
 
     # Separate into creditors (overpaid) and debtors (underpaid)
     balances = merged_df[['name', 'balance']].copy()
@@ -79,8 +84,8 @@ def amount_to_transfer(should_pay_df, actually_paid_df):
     transfers = []
 
     # Get creditors and debtors
-    creditors = balances[balances['balance'] > 0.01].copy()  # Small threshold for floating point
-    debtors = balances[balances['balance'] < -0.01].copy()
+    creditors = balances[balances['balance'] > CENT].copy()  # Small threshold for floating point
+    debtors = balances[balances['balance'] < -CENT].copy()
 
     # Convert to dictionaries for easier manipulation
     creditor_dict = dict(zip(creditors['name'], creditors['balance']))
@@ -95,11 +100,11 @@ def amount_to_transfer(should_pay_df, actually_paid_df):
         # Calculate transfer amount
         transfer_amount = min(creditor_dict[creditor], debtor_dict[debtor])
 
-        if transfer_amount > 0.01:  # Only record non-trivial transfers
+        if transfer_amount > CENT:  # Only record non-trivial transfers
             transfers.append({
                 'sender': debtor,
                 'receiver': creditor,
-                'amount': round(transfer_amount, 2)
+                'amount': transfer_amount.quantize(CENT)
             })
 
         # Update balances
@@ -107,9 +112,9 @@ def amount_to_transfer(should_pay_df, actually_paid_df):
         debtor_dict[debtor] -= transfer_amount
 
         # Remove settled accounts
-        if creditor_dict[creditor] < 0.01:
+        if creditor_dict[creditor] < CENT:
             del creditor_dict[creditor]
-        if debtor_dict[debtor] < 0.01:
+        if debtor_dict[debtor] < CENT:
             del debtor_dict[debtor]
 
     # Create result dataframe

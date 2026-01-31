@@ -1,1 +1,102 @@
+---
+title: "BillSplitterMDS"
+---
+
 {{< include README.md >}}
+
+## Full Usage Demonstration
+
+Here's a complete runnable example showing how to use all four functions in the package.
+
+### Step 1: Prepare Sample Data
+
+First, let's create a sample CSV file with trip expenses:
+
+```{python}
+import pandas as pd
+
+# Create sample trip expense data
+data = {
+    'payer': ['Amy', 'Sam', 'Ben', 'Amy'],
+    'item_name': ['Pasta Dinner', 'Taxi to Airport', 'Hotel Room', 'Drinks'],
+    'item_price': [18.0, 40.0, 200.0, 30.0],
+    'shared_by': ['Amy', 'Amy;Sam;Ben', 'Amy;Ben', 'Amy;Sam;Ben'],
+    'tax_pct': [0.08, 0.08, 0.10, 0.08],
+    'tip_pct': [0.15, 0.10, 0.00, 0.18]
+}
+
+# Save to CSV
+df = pd.DataFrame(data)
+df.to_csv('trip_expenses.csv', index=False)
+print("Sample CSV created:")
+print(df.to_string(index=False))
+```
+
+### Step 2: Load and Validate Data
+
+Use `load_validate_data()` to read the CSV and validate that all values are within acceptable ranges:
+
+```{python}
+from billsplittermds import load_validate_data
+
+# Load and validate the expense data
+valid_df = load_validate_data('trip_expenses.csv')
+print("Data loaded and validated successfully!")
+print(f"  - {len(valid_df)} expense records")
+print(f"  - Tax range: {valid_df['tax_pct'].min():.0%} to {valid_df['tax_pct'].max():.0%}")
+print(f"  - Tip range: {valid_df['tip_pct'].min():.0%} to {valid_df['tip_pct'].max():.0%}")
+```
+
+### Step 3: Calculate What Each Person Should Pay
+
+Use `split_by_item()` to calculate each person's fair share based on which items they consumed:
+
+```{python}
+from billsplittermds import split_by_item
+
+# Calculate what each person should pay
+should_pay = split_by_item(valid_df)
+print("\nWhat each person SHOULD pay (based on items consumed):")
+print(should_pay.to_string(index=False))
+print(f"\nTotal: ${should_pay['should_pay'].sum():.2f}")
+```
+
+### Step 4: Calculate What Each Person Actually Paid
+
+Use `individual_total_payments()` to sum up what each person actually spent:
+
+```{python}
+from billsplittermds import individual_total_payments
+
+# Calculate what each person actually paid
+actually_paid = individual_total_payments(valid_df)
+print("\nWhat each person ACTUALLY paid (who paid the bills):")
+print(actually_paid.to_string(index=False))
+print(f"\nTotal: ${actually_paid['actually_paid'].sum():.2f}")
+```
+
+### Step 5: Calculate Transfers Needed
+
+Use `amount_to_transfer()` to determine who owes money to whom:
+
+```{python}
+from billsplittermds import amount_to_transfer
+
+# Calculate the transfers needed to settle up
+transfers = amount_to_transfer(should_pay, actually_paid)
+print("\nTransfers needed to settle all debts:")
+if len(transfers) == 0:
+    print("  No transfers needed - everyone is settled!")
+else:
+    for _, row in transfers.iterrows():
+        print(f"  {row['sender']} -> {row['receiver']}: ${row['amount']:.2f}")
+```
+
+### Cleanup
+
+```{python}
+# Clean up the sample file
+import os
+os.remove('trip_expenses.csv')
+print("\nDemo complete! Sample file cleaned up.")
+```

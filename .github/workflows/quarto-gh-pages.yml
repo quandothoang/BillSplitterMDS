@@ -31,6 +31,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
+          pip install jupyter nbformat
           pip install -r requirements.txt || true
           pip install quartodoc
           pip install -e .

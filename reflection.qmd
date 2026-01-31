@@ -125,3 +125,8 @@ If scaling this or another project, we recommend:
 -   Automate issue triage with labels
 -   Set up milestone tracking and burndown charts
 
+## Conclusion
+
+The combination of GitHub Actions, pytest, ruff, and quartodoc provided a robust development infrastructure for BillSplitterMDS. These tools enabled automated quality checks, consistent code style, and professional documentation with minimal manual effort.
+
+For future projects, we would maintain this toolset while adding type checking and expanding test coverage earlier in development.

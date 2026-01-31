@@ -1,0 +1,132 @@
+# Development Tools, Infrastructure, and Practices
+
+This page discusses the tools, GitHub infrastructure, and organizational practices used in developing BillSplitterMDS, along with recommendations for scaling projects.
+
+## Tools Used
+
+### Version Control & Collaboration
+
+| Tool | Purpose |
+|-----------------------------|-------------------------------------------|
+| **Git** | Distributed version control for tracking changes |
+| **GitHub** | Repository hosting, issue tracking, project boards, code review |
+| **GitHub Actions** | CI/CD automation for testing, linting, and deployment |
+
+### Testing & Quality Assurance
+
+| Tool           | Purpose                                    |
+|----------------|--------------------------------------------|
+| **pytest**     | Unit testing framework for Python          |
+| **pytest-cov** | Code coverage measurement                  |
+| **Codecov**    | Coverage tracking and reporting service    |
+| **ruff**       | Fast Python linter for code style checking |
+
+### Documentation
+
+| Tool             | Purpose                                                |
+|-----------------------------|-------------------------------------------|
+| **Quarto**       | Scientific and technical publishing system             |
+| **quartodoc**    | Auto-generate API documentation from Python docstrings |
+| **GitHub Pages** | Free hosting for documentation website                 |
+
+### Packaging & Distribution
+
+| Tool          | Purpose                                                |
+|---------------|--------------------------------------------------------|
+| **hatchling** | Modern Python build backend                            |
+| **twine**     | Package upload to PyPI/TestPyPI                        |
+| **TestPyPI**  | Testing package distribution before production release |
+
+## Workflow Practices
+
+### GitHub Flow (Primary Workflow)
+
+For most development work, we followed GitHub Flow:
+
+1.  **Create feature branch** from `main`
+2.  **Make changes** and commit with meaningful messages
+3.  **Open pull request** for code review
+4.  **Address feedback** from team members
+5.  **Merge to main** after approval
+
+This workflow is simple and effective for continuous deployment.
+
+### Git Flow (Milestone 4)
+
+For coordinated feature sets requiring multiple PRs, we used Git Flow:
+
+1.  **Create `development` branch** from `main`
+2.  **Create feature branches** from `development`
+3.  **Merge features** into `development` via reviewed PRs
+4.  **Final merge** of `development` into `main`
+
+This provides a staging area to coordinate related changes before release.
+
+### Code Review Practices
+
+-   Every PR requires at least one reviewer
+-   Use GitHub's review features (comments, suggestions, approvals)
+-   Check that CI passes before merging
+-   Squash commits for cleaner history when appropriate
+
+## CI/CD Pipeline
+
+Our automated pipeline includes:
+
+```         
+Push/PR to main
+    │
+    ├── Run tests (pytest)
+    │
+    ├── Check code style (ruff)
+    │
+    ├── Measure coverage (pytest-cov)
+    │
+    └── Upload coverage (Codecov)
+
+Release published
+    │
+    ├── Build package
+    │
+    └── Deploy to TestPyPI
+```
+
+## Recommendations for Scaling
+
+If scaling this or another project, we recommend:
+
+### 1. Enhanced Testing
+
+-   Add integration tests for end-to-end workflows
+-   Add property-based testing with Hypothesis
+-   Set minimum coverage thresholds (e.g., 80%)
+
+### 2. Type Safety
+
+-   Add type hints to all functions
+-   Use mypy for static type checking
+-   Include type checking in CI pipeline
+
+### 3. Documentation
+
+-   Add more tutorials and use-case examples
+-   Include contribution guidelines for new developers
+-   Add changelog automation
+
+### 4. Deployment
+
+-   Deploy to production PyPI (not just TestPyPI)
+-   Consider Docker containers for reproducibility
+-   Add staging environment for testing releases
+
+### 5. Project Management
+
+-   Use GitHub Projects for sprint planning
+-   Automate issue triage with labels
+-   Set up milestone tracking and burndown charts
+
+## Conclusion
+
+The combination of GitHub Actions, pytest, ruff, and quartodoc provided a robust development infrastructure for BillSplitterMDS. These tools enabled automated quality checks, consistent code style, and professional documentation with minimal manual effort.
+
+For future projects, we would maintain this toolset while adding type checking and expanding test coverage earlier in development.

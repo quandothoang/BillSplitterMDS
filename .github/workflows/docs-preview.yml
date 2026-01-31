@@ -21,6 +21,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
+          pip install jupyter nbformat
           pip install quartodoc
           pip install -e .
 
@@ -36,14 +37,3 @@ jobs:
           name: docs-preview
           path: _site
           retention-days: 5
-
-      - name: Comment PR with preview info
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '📚 **Documentation Preview Built!**\n\nDownload the preview artifact from the Actions tab to view the rendered documentation.'
-            })
